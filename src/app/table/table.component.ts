@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
 
 import {Course} from '../models/course.model';
 import {CourseService} from '../service/course.service';
@@ -13,18 +12,23 @@ export class TableComponent implements OnInit {
 
   courses: Course[];
 
-  constructor(private router: Router, private courseService: CourseService) { }
+  constructor(private courseService: CourseService) { }
 
   ngOnInit() {
     this.courseService.getCourses().subscribe(data => {
       console.log(data);
-      let prettyData = data["body"];
-      for (var i = 0; i < prettyData.length; i++) {
-        let formattedLevel = prettyData[i]["level"][0].toUpperCase() + prettyData[i]["level"].slice(1).toLowerCase();
-        prettyData[i]["level"] = formattedLevel;
-      }
-      this.courses = prettyData;
+      data["body"] = this.makeUppercaseTheFirstChar(data["body"]);
+      this.courses = data["body"];
     });
+  }
+
+  public makeUppercaseTheFirstChar(body: object[]){
+    for (var i = 0; i < body.length; i++) {
+      let prettyString = body[i]["level"][0].toUpperCase() + body[i]["level"].slice(1).toLowerCase();
+      console.log(prettyString);
+      body[i]["level"] = prettyString;
+    }
+    return body;
   }
 
 }
