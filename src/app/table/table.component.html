@@ -1,0 +1,27 @@
+<div class='container'>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Courses</h1>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Level</th>
+                <th scope="col">Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let course of courses">
+                <th scope="row">{{course.courseId}}</th>
+                <td>{{course.title}}</td>
+                <td>{{course.teacher}}</td>
+                <td>{{course.level}}</td>
+                <td>{{course.hours}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
